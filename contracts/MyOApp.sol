@@ -26,9 +26,18 @@ contract MyOApp is OApp {
     uint32 _dstEid,
     string memory _message,
     bytes calldata _options
-  ) external payable returns (MessagingReceipt memory receipt) {
+  ) 
+    external 
+    payable 
+    returns (MessagingReceipt memory receipt) 
+  {
     bytes memory _payload = abi.encode(_message);
-    receipt = _lzSend(_dstEid, _payload, _options, MessagingFee(msg.value, 0), payable(msg.sender));
+    receipt = _lzSend(
+      _dstEid, 
+      _payload, 
+      _options, 
+      MessagingFee(msg.value, 0), payable(msg.sender)
+    );
   }
 
   /**
@@ -44,9 +53,18 @@ contract MyOApp is OApp {
     string memory _message,
     bytes memory _options,
     bool _payInLzToken
-  ) public view returns (MessagingFee memory fee) {
+  ) 
+    public 
+    view 
+    returns (MessagingFee memory fee) 
+  {
     bytes memory payload = abi.encode(_message);
-    fee = _quote(_dstEid, payload, _options, _payInLzToken);
+    fee = _quote(
+      _dstEid, 
+      payload, 
+      _options, 
+      _payInLzToken
+    );
   }
 
   /**
