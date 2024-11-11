@@ -16,10 +16,10 @@ const amoyContract: OmniPointHardhat = {
   contractName: 'MyOApp',
 };
 
-const amoyContract: OmniPointHardhat = {
-  eid: EndpointId.AMOY_V2_TESTNET,
+const holeskyContract: OmniPointHardhat = {
+  eid: EndpointId.HOLESKY_V2_TESTNET,
   contractName: 'MyOApp',
-}
+};
 
 const config: OAppOmniGraphHardhat = {
   contracts: [
@@ -32,6 +32,9 @@ const config: OAppOmniGraphHardhat = {
     {
       contract: amoyContract,
     },
+    {
+      contract: holeskyContract,
+    }
   ],
   connections: [
     {
@@ -87,7 +90,12 @@ const config: OAppOmniGraphHardhat = {
       to: fujiContract,
     },
     {
-      from: 
+      from: holeskyContract,
+      to: sepoliaContract,
+    },
+    {
+      from: sepoliaContract,
+      to: holeskyContract,
     }
   ],
 }
