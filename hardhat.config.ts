@@ -54,6 +54,11 @@ const config: HardhatUserConfig = {
       url: process.env.RPC_URL_AMOY || 'https://polygon-amoy-bor-rpc.publicnode.com',
       accounts,
     },
+    'holesky': {
+      eid: EndpointId.HOLESKY_V2_TESTNET,
+      url: process.env.HOLESKY || 'https://rpc.holesky.ethpandaops.io',
+      accounts,
+    },
   },
   namedAccounts: {
     deployer: {
