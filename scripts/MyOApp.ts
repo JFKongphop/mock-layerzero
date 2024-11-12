@@ -1,17 +1,44 @@
-const { ethers, assert } = require("ethers");
-const dotenv = require('dotenv');
-const data = require('../artifacts/contracts/BoiNoTime.sol/BoiNoTime.json');
+import { ethers } from 'ethers';
+import data from '../artifacts/contracts/MyOApp.sol/MyOApp.json';
+import dotenv from 'dotenv';
+import { Options } from '@layerzerolabs/lz-v2-utilities';
+import { EndpointId } from '@layerzerolabs/lz-definitions';
+
 dotenv.config();
 
-const providerURL = process.env.HOLESKY;
-const privateKey = process.env.PRIVATE_KEY;
+const holeskyRpc = process.env.HOLESKY;
+const sepoliaRpc = process.env.SEPOLIA;
+const privateKey = process.env.PRIVATE_KEY!;
 const contractABI = data.abi;
-const contractAddress = '0x84805C6AC2035F7650d657C7eE4fdFc2c62a7635';
+const contractAddressHlk = '0x578d758BccE273E4f350801745D26742C48EBf7A';
+const contractAddressSpl = '0xCec7621cF863B8DB143b40fBCC7a22B5e681830b';
 
 const executionBoiNoTime = async () => {  
-  const provider = new ethers.JsonRpcProvider(providerURL);
-  const wallet = new ethers.Wallet(privateKey, provider);
-  const contract = new ethers.Contract(contractAddress, contractABI, wallet);
+  const holesky = new ethers.providers.JsonRpcProvider(holeskyRpc);
+  const sepolia = new ethers.providers.JsonRpcProvider(sepoliaRpc);
+
+  const walletHlk = new ethers.Wallet(privateKey, holesky);
+  const walletSpl = new ethers.Wallet(privateKey, sepolia);
+  const contractHolesky: any = new ethers.Contract(contractAddressHlk, contractABI, walletHlk);
+  const contractSepolia: any = new ethers.Contract(contractAddressSpl, contractABI, walletSpl);
+
+  const value = ethers.utils.parseEther('0.01');
+  const options = Options.newOptions().addExecutorLzReceiveOption(200000, 0).toHex().toString();
+  console.log(options)
+
+  // const tx = await contractHolesky.send(
+  //   EndpointId.SEPOLIA_V2_TESTNET,
+  //   'fuck you layerzero',
+  //   options,
+  //   { value },
+  // );
+  // const receipt = await tx.wait();
+  // console.log(receipt);
+
+  // console.log(nativeFee) 
+
+  // console.log(contractHolesky, contractSepolia);
+
 
   /***** CHECK BID AND SELL_SUPPLY *****/
   // let tx = await contract.setAuctionActive(true);

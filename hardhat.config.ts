@@ -11,6 +11,9 @@ import '@nomiclabs/hardhat-ethers';
 import '@layerzerolabs/toolbox-hardhat';
 import { HardhatUserConfig, HttpNetworkAccountsUserConfig } from 'hardhat/types';
 import { EndpointId } from '@layerzerolabs/lz-definitions';
+import "@nomicfoundation/hardhat-verify";
+
+// npx hardhat verify --network holesky 0x578d758BccE273E4f350801745D26742C48EBf7A "0x6EDCE65403992e310A62460808c4b910D972f10f" "0xd73F821fcA522Cbb672F8354d25470DBf4948c9C"
 
 const PRIVATE_KEY = process.env.PRIVATE_KEY!
 const accounts: HttpNetworkAccountsUserConfig = [PRIVATE_KEY];
@@ -21,7 +24,7 @@ if (accounts == null) {
   );
 }
 
-const config: HardhatUserConfig = {
+const config = {
   paths: {
     cache: 'cache/hardhat',
   },
@@ -37,7 +40,7 @@ const config: HardhatUserConfig = {
         },
       },
     ],
-  },
+  },  
   networks: {
     'sepolia-testnet': {
       eid: EndpointId.SEPOLIA_V2_TESTNET,
@@ -65,10 +68,8 @@ const config: HardhatUserConfig = {
       default: 0, // wallet address of index[0], of the mnemonic in .env
     },
   },
-  verify: {
-    etherscan: {
-      apiKey: process.env.ETHERSCAN_API_KEY
-    }
+  etherscan: {
+    apiKey: 'JRNS2IIIK5PIH844PAJHBRZ9XHHS62FPKD'
   }
 }
 

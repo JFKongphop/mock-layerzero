@@ -16,7 +16,8 @@
     "test:forge": "forge test",
     "test:hardhat": "hardhat test",
     "dp": "npx hardhat lz:deploy",
-    "vrfh": "npx hardhat run --network holesky verify/MyOApp.ts"
+    "vrfh": "npx hardhat run --network holesky verify/MyOApp.ts",
+    "call": "ts-node scripts/MyOApp.ts"
   },
   "resolutions": {
     "ethers": "^5.7.2",
@@ -71,5 +72,8 @@
   "overrides": {
     "ethers": "^5.7.2",
     "hardhat-deploy": "^0.12.1"
+  },
+  "dependencies": {
+    "@nomicfoundation/hardhat-verify": "^2.0.11"
   }
 }

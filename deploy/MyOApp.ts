@@ -33,7 +33,7 @@ const deploy: DeployFunction = async (hre) => {
   // }
   const endpointV2Deployment = await hre.deployments.get('EndpointV2');
   
-  const { address } = await deploy(contractName, {
+  const con = await deploy(contractName, {
     from: deployer,
     args: [
       endpointV2Deployment.address,
@@ -43,8 +43,13 @@ const deploy: DeployFunction = async (hre) => {
     skipIfAlreadyDeployed: false,
   });
 
-  const l = `Deployed contract: ${contractName}, network: ${hre.network.name}, address: ${address}`;
+  const l = `Deployed contract: ${contractName}, network: ${hre.network.name}, address: ${con.address}`;
   console.log(l);
+
+  
+
+
+
 };
 
 deploy.tags = [contractName];

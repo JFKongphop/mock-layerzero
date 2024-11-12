@@ -45,13 +45,18 @@ describe('MyOApp Test', function () {
       EndpointV2MockArtifact.bytecode, 
       endpointOwner
     );
+    console.log(EndpointV2Mock.interface)
   });
+  
 
   // beforeEach hook for setup that runs before each test in the block
   beforeEach(async () => {
     // Deploying a mock LZ EndpointV2 with the given Endpoint ID
     mockEndpointV2A = await EndpointV2Mock.deploy(eidA);
     mockEndpointV2B = await EndpointV2Mock.deploy(eidB);
+
+    console.log(mockEndpointV2A.interface)
+    
 
     // Deploying two instances of MyOApp contract and linking them to the mock LZEndpoint
     myOAppA = await MyOApp.deploy(mockEndpointV2A.address, ownerA.address);
@@ -76,6 +81,8 @@ describe('MyOApp Test', function () {
     // Define native fee and quote for the message send operation
     let nativeFee = 0;
     ;[nativeFee] = await myOAppA.quote(eidB, 'Test message.', options, false);
+
+    console.log(nativeFee)
 
     // Execute send operation from myOAppA
     await myOAppA.send(eidB, 'Test message.', options, { value: nativeFee.toString() });
