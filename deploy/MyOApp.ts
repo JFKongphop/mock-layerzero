@@ -32,12 +32,12 @@ const deploy: DeployFunction = async (hre) => {
   //   }
   // }
   const endpointV2Deployment = await hre.deployments.get('EndpointV2');
-
+  
   const { address } = await deploy(contractName, {
     from: deployer,
     args: [
-      endpointV2Deployment.address, // LayerZero's EndpointV2 address
-      deployer, // owner
+      endpointV2Deployment.address,
+      deployer,
     ],
     log: true,
     skipIfAlreadyDeployed: false,

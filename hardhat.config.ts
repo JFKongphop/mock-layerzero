@@ -65,6 +65,11 @@ const config: HardhatUserConfig = {
       default: 0, // wallet address of index[0], of the mnemonic in .env
     },
   },
+  verify: {
+    etherscan: {
+      apiKey: process.env.ETHERSCAN_API_KEY
+    }
+  }
 }
 
 export default config;
