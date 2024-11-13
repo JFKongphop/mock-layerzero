@@ -13,6 +13,8 @@ import { HardhatUserConfig, HttpNetworkAccountsUserConfig } from 'hardhat/types'
 import { EndpointId } from '@layerzerolabs/lz-definitions';
 import "@nomicfoundation/hardhat-verify";
 
+const contractAddressHlk = '0x578d758BccE273E4f350801745D26742C48EBf7A';
+const contractAddressSpl = '0xCec7621cF863B8DB143b40fBCC7a22B5e681830b';
 // npx hardhat verify --network holesky 0x578d758BccE273E4f350801745D26742C48EBf7A "0x6EDCE65403992e310A62460808c4b910D972f10f" "0xd73F821fcA522Cbb672F8354d25470DBf4948c9C"
 
 const PRIVATE_KEY = process.env.PRIVATE_KEY!

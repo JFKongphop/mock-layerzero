@@ -10,8 +10,8 @@ const holeskyRpc = process.env.HOLESKY;
 const sepoliaRpc = process.env.SEPOLIA;
 const privateKey = process.env.PRIVATE_KEY!;
 const contractABI = data.abi;
-const contractAddressHlk = '0x578d758BccE273E4f350801745D26742C48EBf7A';
-const contractAddressSpl = '0xCec7621cF863B8DB143b40fBCC7a22B5e681830b';
+const addressHlk = '0x578d758BccE273E4f350801745D26742C48EBf7A';
+const addressSpl = '0xCec7621cF863B8DB143b40fBCC7a22B5e681830b';
 
 const executionBoiNoTime = async () => {  
   const holesky = new ethers.providers.JsonRpcProvider(holeskyRpc);
@@ -19,21 +19,21 @@ const executionBoiNoTime = async () => {
 
   const walletHlk = new ethers.Wallet(privateKey, holesky);
   const walletSpl = new ethers.Wallet(privateKey, sepolia);
-  const contractHolesky: any = new ethers.Contract(contractAddressHlk, contractABI, walletHlk);
-  const contractSepolia: any = new ethers.Contract(contractAddressSpl, contractABI, walletSpl);
+  const contractHolesky: any = new ethers.Contract(addressHlk, contractABI, walletHlk);
+  const contractSepolia: any = new ethers.Contract(addressSpl, contractABI, walletSpl);
 
   const value = ethers.utils.parseEther('0.01');
   const options = Options.newOptions().addExecutorLzReceiveOption(200000, 0).toHex().toString();
   console.log(options)
 
-  // const tx = await contractHolesky.send(
-  //   EndpointId.SEPOLIA_V2_TESTNET,
-  //   'fuck you layerzero',
-  //   options,
-  //   { value },
-  // );
-  // const receipt = await tx.wait();
-  // console.log(receipt);
+  const tx = await contractHolesky.send(
+    EndpointId.SEPOLIA_V2_TESTNET,
+    'hello world',
+    options,
+    { value, gasLimit: 5000000 }
+  );
+  const receipt = await tx.wait();
+  console.log(receipt);
 
   // console.log(nativeFee) 
 
